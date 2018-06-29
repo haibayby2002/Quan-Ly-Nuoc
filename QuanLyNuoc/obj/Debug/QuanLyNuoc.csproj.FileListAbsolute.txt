@@ -1,0 +1,9 @@
+C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\bin\Debug\QuanLyNuoc.exe.config
+C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\bin\Debug\QuanLyNuoc.exe
+C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\bin\Debug\QuanLyNuoc.pdb
+C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\obj\Debug\QuanLyNuoc.csprojResolveAssemblyReference.cache
+C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\obj\Debug\QuanLyNuoc.frmDangNhap.resources
+C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\obj\Debug\QuanLyNuoc.Properties.Resources.resources
+C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\obj\Debug\QuanLyNuoc.csproj.GenerateResource.Cache
+C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\obj\Debug\QuanLyNuoc.exe
+C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\obj\Debug\QuanLyNuoc.pdb
