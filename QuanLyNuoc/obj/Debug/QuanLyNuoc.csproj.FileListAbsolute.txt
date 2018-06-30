@@ -7,3 +7,4 @@ C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\obj\Debug\QuanLyNuoc.Properties.Reso
 C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\obj\Debug\QuanLyNuoc.csproj.GenerateResource.Cache
 C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\obj\Debug\QuanLyNuoc.exe
 C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\obj\Debug\QuanLyNuoc.pdb
+C:\Users\dell\Desktop\QuanLyNuoc\QuanLyNuoc\obj\Debug\QuanLyNuoc.frmQuanLyHoDan.resources

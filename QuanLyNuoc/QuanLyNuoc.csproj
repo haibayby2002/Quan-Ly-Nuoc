@@ -60,6 +60,11 @@
     <Compile Include="frmQuanLyHoDan.Designer.cs">
       <DependentUpon>frmQuanLyHoDan.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyNuocDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuanLyNuocDataSet.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmDangNhap.resx">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
     </EmbeddedResource>
@@ -93,6 +98,17 @@
     <None Include="cas-padlock-icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="QuanLyNuocDataSet.xsc">
+      <DependentUpon>QuanLyNuocDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="QuanLyNuocDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>QuanLyNuocDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="QuanLyNuocDataSet.xss">
+      <DependentUpon>QuanLyNuocDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Resources\exit button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
