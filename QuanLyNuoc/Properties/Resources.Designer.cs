@@ -63,6 +63,16 @@ namespace QuanLyNuoc.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap admin {
+            get {
+                object obj = ResourceManager.GetObject("admin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cas_padlock_icon {
             get {
                 object obj = ResourceManager.GetObject("cas-padlock-icon", resourceCulture);
@@ -76,6 +86,66 @@ namespace QuanLyNuoc.Properties {
         internal static System.Drawing.Bitmap exit_button {
             get {
                 object obj = ResourceManager.GetObject("exit button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_cancel_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-cancel-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_male_user_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-male-user-96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_ok_hand_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-ok-hand-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_pencil_25 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-pencil-25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_plus_25 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-plus-25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_trash_25 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-trash-25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
