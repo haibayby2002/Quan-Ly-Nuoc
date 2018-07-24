@@ -21,7 +21,7 @@ namespace QuanLyNuoc
         #region load from database
         private void frmQuanLyHoDan_Load(object sender, EventArgs e)
         {
-            //dgvHoDan.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //chkCheckAll_CheckedChanged(null, null);
             //Đọc nhánh khi load lên
             cmbNhanh.Items.Add("Tất cả");
             SqlDataReader r = Database.Read("select *from Nhanh");
@@ -60,22 +60,22 @@ namespace QuanLyNuoc
                 {
                     if (!chkPhanLoaiHo.Checked) //Tất cả các loại hộ
                     {
-                        dgvHoDan.DataSource = Database.LoadCSDL(@"select *from SelectTheoNhanh('" + cmbNhanh.Text + "')");
+                        dgvHoDan.DataSource = Database.LoadCSDL(@"exec SelectTheoNhanh '" + cmbNhanh.Text + "'");
                     }
                     else        //Phân loại hộ
                     {
-                        dgvHoDan.DataSource = Database.LoadCSDL(@"select *from SelectTheoNhanhVaLoai('" + cmbNhanh.Text + "', '" + cmbLoaiHo.SelectedValue + "')");
+                        dgvHoDan.DataSource = Database.LoadCSDL(@"exec SelectTheoNhanhVaLoai '" + cmbNhanh.Text + "', '" + cmbLoaiHo.SelectedValue + "'");
                     }
                 }
                 else        //Chia hộc
                 {
                     if (!chkPhanLoaiHo.Checked) //Tất cả các loại hộ
                     {
-                        dgvHoDan.DataSource = Database.LoadCSDL(@"select *from SelectTheoNhanhVaHoc('" + cmbNhanh.Text + "', " + cmbHoc.Text + ")");
+                        dgvHoDan.DataSource = Database.LoadCSDL(@"exec SelectTheoNhanhHoc '" + cmbNhanh.Text + "', " + cmbHoc.Text + "");
                     }
                     else
                     {
-                        dgvHoDan.DataSource = Database.LoadCSDL(@"select *from SelectTheoNhanhHocVaLoai('" + cmbNhanh.Text + "', " + cmbHoc.Text + ", '" + cmbLoaiHo.SelectedValue + "')");
+                        dgvHoDan.DataSource = Database.LoadCSDL(@"exec SelectTheoNhanhHocVaLoai '" + cmbNhanh.Text + "', " + cmbHoc.Text + ", '" + cmbLoaiHo.SelectedValue + "'");
                     }
                 }
             }
@@ -89,13 +89,14 @@ namespace QuanLyNuoc
                 //Phân loại hay không
                 if (!chkPhanLoaiHo.Checked)
                 {
-                    dgvHoDan.DataSource = Database.LoadCSDL(@"select * from SelectFull()");
+                    dgvHoDan.DataSource = Database.LoadCSDL(@"exec SelectAll");
                 }
                 else
                 {
-                    dgvHoDan.DataSource = Database.LoadCSDL(@"select *from SelectTheoLoai('" + cmbLoaiHo.SelectedValue + "')");
+                    dgvHoDan.DataSource = Database.LoadCSDL(@"exec SelectTheoLoai '" + cmbLoaiHo.SelectedValue + "'");
                 }
             }
+            if (dgvHoDan.Rows.Count != 0) dgvHoDan.Rows[0].Selected = false;
         }
 
         //Chia dựa vào hộc
@@ -106,11 +107,11 @@ namespace QuanLyNuoc
             {
                 if (!chkPhanLoaiHo.Checked)     //Phân loại
                 {
-                    dgvHoDan.DataSource = Database.LoadCSDL(@"select *from SelectTheoNhanh('" + cmbNhanh.Text + "')");
+                    dgvHoDan.DataSource = Database.LoadCSDL(@"exec SelectTheoNhanh '" + cmbNhanh.Text + "'");
                 }
                 else    //Không phân loại
                 {
-                    dgvHoDan.DataSource = Database.LoadCSDL(@"select *from SelectTheoNhanhVaLoai('" + cmbNhanh.Text + "', '" + cmbLoaiHo.SelectedValue + "')");
+                    dgvHoDan.DataSource = Database.LoadCSDL(@"exec SelectTheoNhanhVaLoai'" + cmbNhanh.Text + "', '" + cmbLoaiHo.SelectedValue + "'");
                 }
             }
             else    //Trường hợp chọn hộc thì lọc ra nhánh trong hộc
@@ -118,12 +119,25 @@ namespace QuanLyNuoc
                 //không phân loại
                 if (!chkPhanLoaiHo.Checked)
                 {
-                    dgvHoDan.DataSource = Database.LoadCSDL(@"select *from SelectTheoNhanhVaHoc('" + cmbNhanh.Text + "', " + cmbHoc.Text + ")");
+                    dgvHoDan.DataSource = Database.LoadCSDL(@"exec SelectTheoNhanhHoc '" + cmbNhanh.Text + "', " + cmbHoc.Text + "");
                 }
                 else
                 {
-                    dgvHoDan.DataSource = Database.LoadCSDL(@"select *from SelectTheoNhanhHocVaLoai('" + cmbNhanh.Text + "', " + cmbHoc.Text + ", '" + cmbLoaiHo.SelectedValue + "')");
+                    dgvHoDan.DataSource = Database.LoadCSDL(@"exec SelectTheoNhanhHocVaLoai '" + cmbNhanh.Text + "', " + cmbHoc.Text + ", '" + cmbLoaiHo.SelectedValue + "'");
                 }
+            }
+            if (dgvHoDan.Rows.Count != 0) dgvHoDan.Rows[0].Selected = false;
+        }
+
+        void ReLoad()
+        {
+            if (cmbNhanh.SelectedIndex == 0)  //Nếu nhánh chọn tất cả thì theo nhánh mà chiến
+            {
+                cmbNhanh_SelectionChangeCommitted(null, null);
+            }
+            else    //Ngược lại thì cứ theo hộc mà indexchange
+            {
+                cmbHoc_SelectedIndexChanged(null, null);
             }
         }
 
@@ -141,14 +155,7 @@ namespace QuanLyNuoc
                 //Dù gì thì cũng phải load CSDL lên loại hộ
                 cmbLoaiHo.DataSource = Database.LoadCSDL(@"select *from LoaiHo");
 
-                if (cmbNhanh.SelectedIndex == 0)  //Nếu nhánh chọn tất cả thì theo nhánh mà chiến
-                {
-                    cmbNhanh_SelectionChangeCommitted(null, null);
-                }
-                else    //Ngược lại thì cứ theo hộc mà indexchange
-                {
-                    cmbHoc_SelectedIndexChanged(null, null);
-                }
+                ReLoad();
             }
             else
             {
@@ -159,14 +166,7 @@ namespace QuanLyNuoc
                 lblLoaiHo.Hide();
 
                 //Cuối cùng là dựa vào mà load lên thôi
-                if (cmbNhanh.SelectedIndex == 0)  //Nếu nhánh chọn tất cả thì theo nhánh mà chiến
-                {
-                    cmbNhanh_SelectionChangeCommitted(null, null);
-                }
-                else    //Ngược lại thì cứ theo hộc mà indexchange
-                {
-                    cmbHoc_SelectedIndexChanged(null, null);
-                }
+                ReLoad();
             }
         }
 
@@ -241,24 +241,30 @@ namespace QuanLyNuoc
             {
                 foreach (DataGridViewRow item in dgvHoDan.Rows)
                 {
-                    item.Cells["check"].Value = chkCheckAll.Checked;
+                    item.Selected = chkCheckAll.Checked;
                 }
+            }
+        }
+
+        
+
+        #endregion
+
+        #region Thêm xóa sửa huyền thoại
+        private void btnThemHo_Click(object sender, EventArgs e)
+        {
+            frmThemHo frmThem = new frmThemHo();
+            frmThem.ShowDialog();
+            if (frmThemHo.check)
+            {
+                ReLoad();
+                MessageBox.Show("Thêm thành công!");
             }
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            List<DataGridViewRow> r = new List<DataGridViewRow>();
-            int dem = 0;
-            foreach (DataGridViewRow item in dgvHoDan.Rows)
-            {
-                if(Convert.ToBoolean(item.Cells["check"].Value))
-                {
-                    dem++;
-                    r.Add(item);
-                }
-            }
-
+            int dem = dgvHoDan.SelectedRows.Count;
             //Phải có phần tử chọn thì mới xóa được
             if (dem == 0)
             {
@@ -273,11 +279,15 @@ namespace QuanLyNuoc
                 {
                     if (dem < 3)
                     {
-                        for (int i = 0; i < r.Count; i++)
+                        string[] query = new string[dem];
+                        int i = 0;
+                        //);
+                        foreach (DataGridViewRow c in dgvHoDan.SelectedRows)
                         {
-                            //MessageBox.Show("Nhanh " + Database.GetNhanh(r[i].Cells["MaHo"].ToString()) + "\r\n" + "Ma so: " + Database.GetId(r[i].Cells["MaHo"].ToString()));
-                            Database.Change(@"delete from HoDan where MaHo = " + Database.GetId(r[i].Cells["MaHo"].Value.ToString()) + " and MaNhanh = '" + Database.GetNhanh(r[i].Cells["MaHo"].Value.ToString()) + "'");
+                            query[i] = @"delete from HoDan where MaHo = " + Database.GetId(c.Cells["MaHo"].Value.ToString()) + " and MaNhanh = '" + Database.GetNhanh(c.Cells["MaHo"].Value.ToString()) + "'";
+                            i++;
                         }
+                        Database.Change(query);
                         chkPhanLoaiHo_CheckedChanged(null, null);
                         MessageBox.Show("Đã xóa thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -287,11 +297,16 @@ namespace QuanLyNuoc
                         QuanTri.ShowDialog();
                         if (frmHoiQuanTri.check)
                         {
-                            for (int i = 0; i < r.Count; i++)
+                            //Xóa
+                            string[] query = new string[dem];
+                            int i = 0;
+                            //);
+                            foreach (DataGridViewRow c in dgvHoDan.SelectedRows)
                             {
-                                //MessageBox.Show("Nhanh " + Database.GetNhanh(r[i].Cells["MaHo"].ToString()) + "\r\n" + "Ma so: " + Database.GetId(r[i].Cells["MaHo"].ToString()));
-                                Database.Change(@"delete from HoDan where MaHo = " + Database.GetId(r[i].Cells["MaHo"].Value.ToString()) + " and MaNhanh = '" + Database.GetNhanh(r[i].Cells["MaHo"].Value.ToString()) + "'");
+                                query[i] = @"delete from HoDan where MaHo = " + Database.GetId(c.Cells["MaHo"].Value.ToString()) + " and MaNhanh = '" + Database.GetNhanh(c.Cells["MaHo"].Value.ToString()) + "'";
+                                i++;
                             }
+                            Database.Change(query);
                             chkPhanLoaiHo_CheckedChanged(null, null);
                             MessageBox.Show("Đã xóa thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -300,6 +315,35 @@ namespace QuanLyNuoc
             }
         }
 
+
         #endregion
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            if (dgvHoDan.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn hộ để sửa", "Lỗi chưa chọn phần tử", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            else if(dgvHoDan.SelectedRows.Count != 1)
+            {
+                MessageBox.Show("Vui lòng chỉ chọn một hộ để sửa", "Mỗi lần chỉ sửa thông tin cho một hộ", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            else
+            {
+                DataGridViewRow i = dgvHoDan.SelectedRows[0];
+                frmSuaHo formSuaHo = new frmSuaHo(i.Cells["MaHo"].Value.ToString(), i.Cells["TenHo"].Value.ToString(), i.Cells["MaNhanh"].Value.ToString(), int.Parse(i.Cells["MaHoc"].Value.ToString()), i.Cells["LoaiHo"].Value.ToString());
+                formSuaHo.ShowDialog();
+                if (frmSuaHo.check)
+                {
+                    MessageBox.Show("Sửa đổi thông tin thành công", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ReLoad();
+                }
+            }
+        }
+
+        private void dgvHoDan_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            btnSua_Click(null, null);
+        }
     }
 }

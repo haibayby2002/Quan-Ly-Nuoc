@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaoCaoTungHo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaoCaoTungHo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CongNhan.cs" />
+    <Compile Include="Constant.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="frmDangNhap.cs">
       <SubType>Form</SubType>
@@ -52,12 +63,27 @@
     <Compile Include="frmDangNhap.Designer.cs">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSuaHo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSuaHo.Designer.cs">
+      <DependentUpon>frmSuaHo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmThemHo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmThemHo.Designer.cs">
+      <DependentUpon>frmThemHo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HoDan.cs" />
     <Compile Include="HoiQuanTri.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HoiQuanTri.Designer.cs">
       <DependentUpon>HoiQuanTri.cs</DependentUpon>
     </Compile>
+    <Compile Include="HoKinhDoanh.cs" />
+    <Compile Include="KhongCongNhan.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="frmQuanLyHoDan.cs">
@@ -71,11 +97,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QuanLyNuocDataSet.xsd</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="BaoCaoTungHo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BaoCaoTungHo.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDangNhap.resx">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuanLyHoDan.resx">
       <DependentUpon>frmQuanLyHoDan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSuaHo.resx">
+      <DependentUpon>frmSuaHo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmThemHo.resx">
+      <DependentUpon>frmThemHo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HoiQuanTri.resx">
       <DependentUpon>HoiQuanTri.cs</DependentUpon>
@@ -140,6 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\admin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

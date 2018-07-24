@@ -48,6 +48,36 @@ namespace QuanLyNuoc
             return kq;
         }
 
+        static public void Change(string []query)
+        {
+            conn = new SqlConnection(connStr);
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+            SqlCommand cm = new SqlCommand();
+            cm.Connection = conn;
+            foreach(string s in query)
+            {
+                cm.CommandText = s;
+                cm.ExecuteNonQuery();
+            }
+
+            conn.Close();
+        }
+
+        static public bool ChuoiLaSo(string s)
+        {
+            foreach(char c in s)
+            {
+                if(!char.IsNumber(c))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         //Bo dau
         public static string RemoveUnicode(string text)
         {
@@ -71,6 +101,21 @@ namespace QuanLyNuoc
                 text = text.Replace(arr1[i].ToUpper(), arr2[i].ToUpper());
             }
             return text;
+        }
+
+        public static object GetValue(string sql)
+        {
+            conn = new SqlConnection(connStr);
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+            SqlCommand cm = new SqlCommand(sql, conn);
+
+            object value = cm.ExecuteScalar();
+
+            conn.Close();
+            return value;
         }
 
         public static int GetId(string s)

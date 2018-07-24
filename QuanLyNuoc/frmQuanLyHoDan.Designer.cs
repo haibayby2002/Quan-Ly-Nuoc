@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmbNhanh = new System.Windows.Forms.ComboBox();
             this.cmbHoc = new System.Windows.Forms.ComboBox();
             this.cmbLoaiHo = new System.Windows.Forms.ComboBox();
@@ -42,11 +42,12 @@
             this.btnThemHo = new System.Windows.Forms.Button();
             this.txtTraCuu = new System.Windows.Forms.TextBox();
             this.lblTraCuu = new System.Windows.Forms.Label();
-            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.chkCheckAll = new System.Windows.Forms.CheckBox();
             this.MaHo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenHo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LoaiHo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaNhanh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chkCheckAll = new System.Windows.Forms.CheckBox();
+            this.MaHoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoDan)).BeginInit();
             this.SuspendLayout();
             // 
@@ -129,21 +130,22 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvHoDan.ColumnHeadersHeight = 40;
             this.dgvHoDan.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.check,
             this.MaHo,
             this.TenHo,
-            this.MaNhanh});
+            this.LoaiHo,
+            this.MaNhanh,
+            this.MaHoc});
             this.dgvHoDan.Location = new System.Drawing.Point(0, 156);
-            this.dgvHoDan.MultiSelect = false;
             this.dgvHoDan.Name = "dgvHoDan";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvHoDan.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvHoDan.ReadOnly = true;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvHoDan.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvHoDan.RowHeadersVisible = false;
             this.dgvHoDan.RowHeadersWidth = 50;
             this.dgvHoDan.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
@@ -154,6 +156,7 @@
             this.dgvHoDan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvHoDan.Size = new System.Drawing.Size(952, 350);
             this.dgvHoDan.TabIndex = 7;
+            this.dgvHoDan.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvHoDan_CellMouseDoubleClick);
             // 
             // btnSua
             // 
@@ -166,6 +169,7 @@
             this.btnSua.Text = "Sửa hộ";
             this.btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
@@ -191,11 +195,12 @@
             this.btnThemHo.Text = "Thêm hộ";
             this.btnThemHo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThemHo.UseVisualStyleBackColor = true;
+            this.btnThemHo.Click += new System.EventHandler(this.btnThemHo_Click);
             // 
             // txtTraCuu
             // 
             this.txtTraCuu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTraCuu.Location = new System.Drawing.Point(676, 94);
+            this.txtTraCuu.Location = new System.Drawing.Point(676, 92);
             this.txtTraCuu.Name = "txtTraCuu";
             this.txtTraCuu.Size = new System.Drawing.Size(260, 26);
             this.txtTraCuu.TabIndex = 11;
@@ -206,41 +211,11 @@
             // 
             this.lblTraCuu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTraCuu.AutoSize = true;
-            this.lblTraCuu.Location = new System.Drawing.Point(519, 97);
+            this.lblTraCuu.Location = new System.Drawing.Point(519, 95);
             this.lblTraCuu.Name = "lblTraCuu";
             this.lblTraCuu.Size = new System.Drawing.Size(152, 19);
             this.lblTraCuu.TabIndex = 12;
             this.lblTraCuu.Text = "Tra cứu hộ sử dụng: ";
-            // 
-            // check
-            // 
-            this.check.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.check.HeaderText = "Chọn";
-            this.check.Name = "check";
-            this.check.Width = 51;
-            // 
-            // MaHo
-            // 
-            this.MaHo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.MaHo.DataPropertyName = "MaHo";
-            this.MaHo.HeaderText = "Mã hộ";
-            this.MaHo.Name = "MaHo";
-            this.MaHo.Width = 77;
-            // 
-            // TenHo
-            // 
-            this.TenHo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TenHo.DataPropertyName = "TenHo";
-            this.TenHo.HeaderText = "Tên hộ sử dụng";
-            this.TenHo.Name = "TenHo";
-            // 
-            // MaNhanh
-            // 
-            this.MaNhanh.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.MaNhanh.DataPropertyName = "MaNhanh";
-            this.MaNhanh.HeaderText = "Mã nhánh";
-            this.MaNhanh.Name = "MaNhanh";
-            this.MaNhanh.Width = 103;
             // 
             // chkCheckAll
             // 
@@ -252,6 +227,46 @@
             this.chkCheckAll.Text = "Chọn hết";
             this.chkCheckAll.UseVisualStyleBackColor = true;
             this.chkCheckAll.CheckedChanged += new System.EventHandler(this.chkCheckAll_CheckedChanged);
+            // 
+            // MaHo
+            // 
+            this.MaHo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.MaHo.DataPropertyName = "MaHo";
+            this.MaHo.HeaderText = "Mã hộ";
+            this.MaHo.Name = "MaHo";
+            this.MaHo.ReadOnly = true;
+            this.MaHo.Width = 77;
+            // 
+            // TenHo
+            // 
+            this.TenHo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TenHo.DataPropertyName = "TenHo";
+            this.TenHo.HeaderText = "Tên hộ sử dụng";
+            this.TenHo.Name = "TenHo";
+            this.TenHo.ReadOnly = true;
+            // 
+            // LoaiHo
+            // 
+            this.LoaiHo.DataPropertyName = "LoaiHo";
+            this.LoaiHo.HeaderText = "Loại hộ";
+            this.LoaiHo.Name = "LoaiHo";
+            this.LoaiHo.ReadOnly = true;
+            // 
+            // MaNhanh
+            // 
+            this.MaNhanh.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.MaNhanh.DataPropertyName = "MaNhanh";
+            this.MaNhanh.HeaderText = "Mã nhánh";
+            this.MaNhanh.Name = "MaNhanh";
+            this.MaNhanh.ReadOnly = true;
+            this.MaNhanh.Width = 103;
+            // 
+            // MaHoc
+            // 
+            this.MaHoc.DataPropertyName = "MaHoc";
+            this.MaHoc.HeaderText = "Mã hộc";
+            this.MaHoc.Name = "MaHoc";
+            this.MaHoc.ReadOnly = true;
             // 
             // frmQuanLyHoDan
             // 
@@ -300,10 +315,11 @@
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.TextBox txtTraCuu;
         private System.Windows.Forms.Label lblTraCuu;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn check;
+        private System.Windows.Forms.CheckBox chkCheckAll;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaHo;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenHo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LoaiHo;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaNhanh;
-        private System.Windows.Forms.CheckBox chkCheckAll;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaHoc;
     }
 }
